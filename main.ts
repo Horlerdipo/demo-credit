@@ -5,13 +5,19 @@ import * as winston from 'winston';
 import * as expressWinston from 'express-winston';
 import cors from 'cors';
 import helmet from "helmet";
+import * as dotenv from 'dotenv'
 
 import {AppModule} from "./app.module";
 import {UserModule} from "./users/user.module";
 
+
+dotenv.config({
+    path: '.env'
+});
+
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);
-const port = 3000;
+const port = process.env.PORT;
 const routes: Array<AppModule> = [];
 
 app.use(helmet());
