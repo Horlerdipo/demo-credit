@@ -1,5 +1,5 @@
-class UserService{
-    async hello(){
+class UserService {
+    async hello() {
         return "hello";
     }
 }

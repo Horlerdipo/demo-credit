@@ -1,6 +1,6 @@
 class WalletService {
 
-    async hello(){
+    async hello() {
         return "hello";
     }
 }

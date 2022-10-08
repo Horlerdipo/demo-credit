@@ -1,8 +1,8 @@
 import express from 'express';
-import {CommonRoutesConfig} from "../app.module";
+import {AppModule} from "../app.module";
 import UserController from "./user.controller";
 
-export class UserModule extends CommonRoutesConfig {
+export class UserModule extends AppModule {
     constructor(app: express.Application) {
         super(app, 'UserModule');
     }

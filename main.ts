@@ -6,13 +6,13 @@ import * as expressWinston from 'express-winston';
 import cors from 'cors';
 import helmet from "helmet";
 
-import {CommonRoutesConfig} from "./app.module";
+import {AppModule} from "./app.module";
 import {UserModule} from "./users/user.module";
 
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);
 const port = 3000;
-const routes: Array<CommonRoutesConfig> = [];
+const routes: Array<AppModule> = [];
 
 app.use(helmet());
 app.use(express.json());
@@ -23,7 +23,7 @@ const loggerOptions: expressWinston.LoggerOptions = {
     format: winston.format.combine(
         winston.format.json(),
         winston.format.prettyPrint(),
-        winston.format.colorize({ all: true })
+        winston.format.colorize({all: true})
     ),
 };
 
@@ -36,7 +36,7 @@ app.get('/', (req: express.Request, res: express.Response) => {
     res.status(200).send(runningMessage)
 });
 server.listen(port, () => {
-    routes.forEach((route: CommonRoutesConfig) => {
+    routes.forEach((route: AppModule) => {
         console.log(`Routes configured for ${route.getName()}`);
     });
     console.log(runningMessage);

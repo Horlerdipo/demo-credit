@@ -1,9 +1,9 @@
 import express from 'express';
-import {CommonRoutesConfig} from "../app.module";
+import {AppModule} from "../app.module";
 import UserController from "./wallet.controller";
 import WalletController from "./wallet.controller";
 
-export class WalletModule extends CommonRoutesConfig {
+export class WalletModule extends AppModule {
     constructor(app: express.Application) {
         super(app, 'WalletModule');
     }
