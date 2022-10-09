@@ -22,6 +22,7 @@ class UserService {
         //CREATE USER,CREATE USER WALLET ALSO
         const pin = await bcrypt.hash(createUserDto.pin, 10);
         const token = crypto.randomBytes(20).toString('hex');
+        const accountNumber = helpers.generateAccountNumber(10);
 
         const returningId = await KnexModule.transaction(async (transaction) => {
             const id = await transaction.insert({
@@ -33,7 +34,7 @@ class UserService {
 
             await transaction.insert({
                 user_id: id[0],
-                account_number: helpers.generateAccountNumber(10)
+                account_number: accountNumber,
             }).into("wallets")
             return id;
         })
@@ -46,6 +47,7 @@ class UserService {
                     name: createUserDto.name,
                     email: createUserDto.email,
                     token,
+                    account_number: accountNumber,
                 },
             }
         }
@@ -93,8 +95,30 @@ class UserService {
     }
 
     //TODO:AN ENDPOINT FOR THE LIST OF TRANSACTIONS MADE BY USER
-    async transactions(){
+    async transactions() {
 
+    }
+
+    async userDetails(userId: number) {
+        const userDetails: { email: string, name: string, balance: number, account_number: string, token: string } = await KnexModule
+            .select('users.email', 'users.name', 'wallets.balance', 'wallets.account_number', 'users.token')
+            .from('users')
+            .where('users.id', userId)
+            .innerJoin('wallets', 'users.id', 'wallets.user_id')
+            .first();
+
+        return {
+            statusCode: 200,
+            msg: "Request Processed",
+            data: {
+                email: userDetails.email,
+                name: userDetails.name,
+                account_number: userDetails.account_number,
+                wallet_balance: userDetails.balance,
+                token: userDetails.token
+            }
+
+        };
     }
 }
 

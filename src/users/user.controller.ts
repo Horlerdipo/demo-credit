@@ -52,6 +52,20 @@ class UserController {
             })
         }
     }
+
+    async userDetails(request: express.Request, response: express.Response) {
+
+        try {
+            const serviceResponse = await UserService.userDetails(1);
+            response.status(serviceResponse.statusCode).json(serviceResponse);
+        } catch (error) {
+            response.status(500).json({
+                statusCode: 500,
+                message: helpers.getErrorMessage(error),
+                data: {}
+            })
+        }
+    }
 }
 
 export default new UserController();

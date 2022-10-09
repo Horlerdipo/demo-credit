@@ -28,7 +28,7 @@ export class UserModule extends AppModule {
             )
 
         this.app.post('/user/token', UserController.generateNewToken,)
-
+        this.app.post('/user/details',UserController.userDetails,)
         return this.app;
     }
 
