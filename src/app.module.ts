@@ -1,4 +1,5 @@
 import express from 'express';
+
 export abstract class AppModule {
     app: express.Application;
     name: string;
