@@ -1,11 +1,8 @@
 import type {Knex} from "knex";
 import * as dotenv from 'dotenv'
 
-
-console.log(process.cwd());
-
 dotenv.config({
-    // path: '..\..\.env'
+    // path: '../../.env'
     path: '.env'
 
 });
