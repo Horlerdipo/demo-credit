@@ -27,7 +27,6 @@ class UserService {
 
     async createUser(createUserDto: CreateUserDto): Promise<any> {
 
-        //CREATE USER,CREATE USER WALLET ALSO
         const pin = await bcrypt.hash(createUserDto.pin, 10);
         const token = helpers.generateRandomString(20);
         const accountNumber = helpers.generateAccountNumber(10);

@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "tsc && node --unhandled-rejections=strict ./dist/main.js",
+    "start:dev": "ts-node-dev --respawn src/main.ts",
     "debug": "export DEBUG=* && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "migrate": "knex migrate:latest --knexfile src/database/knexfile.js"
+    "migrate": "knex migrate:latest --knexfile src/database/knexfile.ts"
   },
   "author": "Umar Oladipo",
   "license": "ISC",

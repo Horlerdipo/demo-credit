@@ -13,7 +13,6 @@ class WalletController {
                 return response.status(400).json({errors: errors.array()});
             }
 
-            //TODO: CHANGE USER_ID TO AUTHENTICATED USER ID
             const serviceResponse = await walletService.fundWallet({
                 account_number: request.body.account_number,
                 pin: request.body.pin,
@@ -41,7 +40,6 @@ class WalletController {
                 return response.status(400).json({errors: errors.array()});
             }
 
-            //TODO: CHANGE USER_ID TO AUTHENTICATED USER ID
             const serviceResponse = await walletService.makeTransfer({
                 account_number: request.body.account_number,
                 pin: request.body.pin,
@@ -69,7 +67,6 @@ class WalletController {
                 return response.status(400).json({errors: errors.array()});
             }
 
-            //TODO: CHANGE USER_ID TO AUTHENTICATED USER ID
             const serviceResponse = await walletService.makeWithdrawal({
                 account_number: request.body.account_number,
                 pin: request.body.pin,

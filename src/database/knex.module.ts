@@ -4,7 +4,7 @@ import knex, {Knex} from "knex";
 class KnexModule {
 
     connect(): Knex {
-        const config = require("./knexfile")
+        const config = require("./knexfile");
         return knex(config.development);
     }
 }

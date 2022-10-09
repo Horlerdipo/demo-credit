@@ -2,10 +2,13 @@ import type {Knex} from "knex";
 import * as dotenv from 'dotenv'
 
 
-dotenv.config({
-    path: '.env'
-});
+console.log(process.cwd());
 
+dotenv.config({
+    // path: '..\..\.env'
+    path: '.env'
+
+});
 const config: { [key: string]: Knex.Config } = {
     development: {
         client: "mysql2",

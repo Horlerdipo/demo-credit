@@ -12,7 +12,6 @@ export class UserModule extends AppModule {
         super(app, 'UserModule');
     }
 
-    //TODO: ADD MIDDLEWARE FOR VERIFYING THE REQUEST TOKEN
     configureRoutes() {
         this.app.post('/user',
             body("email").not().isEmpty().isEmail().custom(value => {
