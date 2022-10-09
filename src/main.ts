@@ -9,6 +9,7 @@ import * as dotenv from 'dotenv'
 
 import {AppModule} from "./app.module";
 import {UserModule} from "./users/user.module";
+import {WalletModule} from "./wallets/wallet.module";
 
 
 dotenv.config({
@@ -36,11 +37,14 @@ const loggerOptions: expressWinston.LoggerOptions = {
 app.use(expressWinston.logger(loggerOptions));
 
 routes.push(new UserModule(app));
+routes.push(new WalletModule(app));
 
 const runningMessage = `Server running at http://localhost:${port}`;
-app.get('/', (req: express.Request, res: express.Response) => {
-    res.status(200).send(runningMessage)
+
+app.get('/health', (req: express.Request, res: express.Response) => {
+    res.status(200).send('Online')
 });
+
 server.listen(port, () => {
     routes.forEach((route: AppModule) => {
         console.log(`Routes configured for ${route.getName()}`);

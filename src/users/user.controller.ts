@@ -56,7 +56,8 @@ class UserController {
     async userDetails(request: express.Request, response: express.Response) {
 
         try {
-            const serviceResponse = await UserService.userDetails(1);
+            //TODO CHANGE USER_ID TO AUTHENTICATED USER ID
+            const serviceResponse = await UserService.userDetails(response.locals.user_id);
             response.status(serviceResponse.statusCode).json(serviceResponse);
         } catch (error) {
             response.status(500).json({

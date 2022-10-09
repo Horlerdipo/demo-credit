@@ -1,3 +1,5 @@
+import crypto from "crypto";
+
 class Helpers {
 
     getErrorMessage(error: unknown) {
@@ -7,6 +9,10 @@ class Helpers {
 
     generateAccountNumber(length: number) {
         return Math.floor(Math.pow(10, length - 1) + Math.random() * (Math.pow(10, length) - Math.pow(10, length - 1) - 1));
+    }
+
+    generateRandomString(size: number) {
+        return crypto.randomBytes(size).toString('hex')
     }
 }
 

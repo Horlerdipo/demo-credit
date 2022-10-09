@@ -7,13 +7,21 @@ import {GenerateTokenDto} from "./dtos/generate-token.dto";
 
 class UserService {
 
+    async findUserByToken(token: string) {
+        const user = await KnexModule("users").where("token", token).first();
+
+        if (!user) {
+            return false;
+        }
+        return user;
+    }
+
     async findUserByEmail(email: string) {
         const user = await KnexModule("users").where("email", email).first();
 
         if (!user) {
             return false;
         }
-        console.log(user);
         return user;
     }
 
@@ -21,7 +29,7 @@ class UserService {
 
         //CREATE USER,CREATE USER WALLET ALSO
         const pin = await bcrypt.hash(createUserDto.pin, 10);
-        const token = crypto.randomBytes(20).toString('hex');
+        const token = helpers.generateRandomString(20);
         const accountNumber = helpers.generateAccountNumber(10);
 
         const returningId = await KnexModule.transaction(async (transaction) => {
@@ -77,8 +85,8 @@ class UserService {
         }
 
 
-        const token = crypto.randomBytes(20).toString('hex');
-        console.log(token);
+        const token = helpers.generateRandomString(20);
+
         const returningId = await KnexModule('users').where({
             id: user.id,
         }).update({
