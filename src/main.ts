@@ -25,6 +25,7 @@ app.use(helmet());
 app.use(express.json());
 app.use(cors());
 
+//WINSTON LOGGING CONFIG
 const loggerOptions: expressWinston.LoggerOptions = {
     transports: [new winston.transports.Console()],
     format: winston.format.combine(
@@ -36,6 +37,7 @@ const loggerOptions: expressWinston.LoggerOptions = {
 
 app.use(expressWinston.logger(loggerOptions));
 
+//ADD EVERY MODULE TO THE ROUTE
 routes.push(new UserModule(app));
 routes.push(new WalletModule(app));
 
@@ -46,6 +48,7 @@ app.get('/health', (req: express.Request, res: express.Response) => {
 });
 
 server.listen(port, () => {
+    //INITIALIZE ALL ROUTES
     routes.forEach((route: AppModule) => {
         console.log(`Routes configured for ${route.getName()}`);
     });

@@ -2,7 +2,9 @@ import type {Knex} from "knex";
 import * as dotenv from 'dotenv'
 
 dotenv.config({
+    //ENV PATH FOR DATABASE MIGRATION
     // path: '../../.env'
+    //ENV PATH FOR PROJECT
     path: '.env'
 
 });

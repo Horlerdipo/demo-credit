@@ -5,14 +5,17 @@ import e from "express";
 import helpers from "../helpers";
 
 class WalletController {
+
     async fundWallet(request: express.Request, response: express.Response) {
         try {
 
+            //RUN VALIDATIONS
             const errors = validationResult(request);
             if (!errors.isEmpty()) {
                 return response.status(400).json({errors: errors.array()});
             }
 
+            //EXECUTE WALLET FUNDING SERVICE
             const serviceResponse = await walletService.fundWallet({
                 account_number: request.body.account_number,
                 pin: request.body.pin,
@@ -22,11 +25,9 @@ class WalletController {
             response.status(serviceResponse.statusCode).json(serviceResponse);
 
         } catch (error) {
-            response.status(500).json({
-                statusCode: 500,
-                message: helpers.getErrorMessage(error),
-                data: {}
-            })
+            //DISPLAY ANY ERRORS CAUGHT
+            //TODO: IF IN PRODUCTION LOG AND DISPLAY NORMAL ERROR
+            return helpers.sendErrorMessage(response,error)
         }
 
     }
@@ -49,11 +50,7 @@ class WalletController {
             response.status(serviceResponse.statusCode).json(serviceResponse);
 
         } catch (error) {
-            response.status(500).json({
-                statusCode: 500,
-                message: helpers.getErrorMessage(error),
-                data: {}
-            })
+            return helpers.sendErrorMessage(response,error)
         }
 
     }
@@ -76,11 +73,7 @@ class WalletController {
             response.status(serviceResponse.statusCode).json(serviceResponse);
 
         } catch (error) {
-            response.status(500).json({
-                statusCode: 500,
-                message: helpers.getErrorMessage(error),
-                data: {}
-            })
+            return helpers.sendErrorMessage(response,error)
         }
 
     }
