@@ -15,7 +15,7 @@ export class UserModule extends AppModule {
     configureRoutes() {
         this.app.post('/user',
             body("email").not().isEmpty().isEmail().custom(value => {
-                return UserService.findUserByEmail(value).then(user => {
+                return UserService.findUserWithIdentifier(value,"email").then(user => {
                     if (user) {
                         return Promise.reject('E-mail already in use');
                     }
@@ -34,6 +34,10 @@ export class UserModule extends AppModule {
         this.app.post('/user/details',
             AuthMiddleware.run,
             UserController.userDetails,)
+
+        this.app.post('/user/transactions',
+            AuthMiddleware.run,
+            UserController.getTransactionsDetails,)
 
         return this.app;
     }

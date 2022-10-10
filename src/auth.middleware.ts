@@ -11,8 +11,10 @@ class AuthMiddleware {
 
     async run(request: express.Request, response: express.Response, next: express.NextFunction) {
 
+        //GET HEADER FROM REQUEST
         const authHeader = request.header('auth-token');
 
+        //IF NO AUTH HEADER,SEND ERROR MESSAGE
         if (!authHeader) {
             return response.status(400).json({
                 statusCode: 400,
@@ -20,7 +22,8 @@ class AuthMiddleware {
                 data: {}
             })
         }
-        const userInfo = await UserService.findUserByToken(authHeader);
+        //CHECK IF TOKEN EXISTS IN DB
+        const userInfo = await UserService.findUserWithIdentifier(authHeader,"token");
         if (!userInfo) {
             return response.status(400).json({
                 statusCode: 400,
@@ -28,6 +31,7 @@ class AuthMiddleware {
                 data: {},
             })
         }
+        //ADD USER ID TO LOCALS
         response.locals.user_id = userInfo.id;
         return next();
     }

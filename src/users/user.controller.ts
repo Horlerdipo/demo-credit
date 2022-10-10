@@ -20,11 +20,7 @@ class UserController {
             response.status(returnUser.statusCode).json(returnUser);
 
         } catch (error) {
-            response.status(500).json({
-                statusCode: 500,
-                message: helpers.getErrorMessage(error),
-                data: {}
-            })
+            return helpers.sendErrorMessage(response,error)
         }
 
     }
@@ -45,11 +41,7 @@ class UserController {
             response.status(serviceResponse.statusCode).json(serviceResponse);
 
         } catch (error) {
-            response.status(500).json({
-                statusCode: 500,
-                message: helpers.getErrorMessage(error),
-                data: {}
-            })
+            return helpers.sendErrorMessage(response,error)
         }
     }
 
@@ -59,13 +51,21 @@ class UserController {
             const serviceResponse = await UserService.userDetails(response.locals.user_id);
             response.status(serviceResponse.statusCode).json(serviceResponse);
         } catch (error) {
-            response.status(500).json({
-                statusCode: 500,
-                message: helpers.getErrorMessage(error),
-                data: {}
-            })
+            return helpers.sendErrorMessage(response,error)
+        }
+    }
+
+    async getTransactionsDetails(request: express.Request, response: express.Response){
+        try {
+            const serviceResponse = await UserService.getTransactionsDetails(response.locals.user_id);
+            response.status(serviceResponse.statusCode).json(serviceResponse);
+        } catch (error) {
+            return helpers.sendErrorMessage(response,error)
         }
     }
 }
+
+
+
 
 export default new UserController();
