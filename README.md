@@ -3,12 +3,16 @@
 Demo credit is an MVP wallets API for LendSqr.![ER Diagram for the Database](https://raw.githubusercontent.com/Horlerdipo/demo-credit/main/public/demo-credit.png)
 
 1. Folder Structure
+
    The folder structure of the source code is inspired by the folder structure of the popular Node.js backend framework [Nest.js](https://nestjs.com/) where projects are divided into modules and instantiated in a single module.
 2. Live Sever URL
+
    The URL endpoint for the project is [here](https://umar-lendsqr-be-test.up.railway.app/)
 3. Postman Collection Documentation
+
    The URL endpoint for the postman collection documentation of the available API endpoints  is [here](https://documenter.getpostman.com/view/23247129/2s83ziN46q#auth-info-33ed4da3-5ad7-4d16-892f-a9740424a3a8)
 4. Postman Collection URL
+
    The URL endpoint for the postman collection of the available API endpoints  is [here]( https://www.getpostman.com/collections/4e79d90d60c4d5b4f188)
 
 # Features
